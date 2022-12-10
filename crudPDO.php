@@ -10,11 +10,10 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // prepare sql and bind parameters
-  $stmt = $conn->prepare("INSERT INTO students (firstname, lastname, email)
-  VALUES (:firstname, :lastname, :email)");
-  $stmt->bindParam(':firstname', $firstname);
-  $stmt->bindParam(':lastname', $lastname);
-  $stmt->bindParam(':email', $email);
+  $stmt = $conn->prepare("INSERT INTO students (firstname, lastname, email)VALUES (:firstname, :lastname, :email)");
+  $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
+  $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
+  $stmt->bindParam(':email', $email,PDO::PARAM_STR);
 
   // insert a row
   $firstname = "John";
