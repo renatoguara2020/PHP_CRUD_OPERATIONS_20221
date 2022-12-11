@@ -1,47 +1,23 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "crud";
+<!DOCTYPE html>
+<html lang="en">
 
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-  // prepare sql and bind parameters
-  $stmt = $conn->prepare("INSERT INTO students (firstname, lastname, email)VALUES (:firstname, :lastname, :email)");
-  $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
-  $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
-  $stmt->bindParam(':email', $email,PDO::PARAM_STR);
+<body>
+    <form method="post" action="validation.php">
+        <label>Nome</label>
+        <input type="text" name="firstname"></input>
+        <label>sobrenome</label>
+        <input type="text" name="lastname"></input>
+        <label>Email</label>
+        <input type="text" name="email"></input>
+        <input type="submit">Enviar</input>
+    </form>
+</body>
 
-  // insert a row
-  $firstname = "John";
-  $lastname = "Doe";
-  $email = "john@example.com";
-  $stmt->execute();
-
-  // insert another row
-  $firstname = "Mary";
-  $lastname = "Moe";
-  $email = "mary@example.com";
-  $stmt->execute();
-
-  // insert another row
-  $firstname = "Julie";
-  $lastname = "Dooley";
-  $email =  filter_var(INPUT_POST, $email , FILTER_SANITIZE_EMAIL); 
-  $stmt->execute();
-
-  echo "New records created successfully";
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-
-$stmt = $conn->prepare("DELETE FROM students WHERE id = 15");
-$stmt->execute();
-
-
-$stmt = null;
-$conn = null;
-?>
+</html>
