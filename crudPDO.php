@@ -30,7 +30,7 @@ try {
   // insert another row
   $firstname = "Julie";
   $lastname = "Dooley";
-  $email = "julie@example.com";
+  $email =  filter_var(INPUT_POST, $email , FILTER_SANITIZE_EMAIL); 
   $stmt->execute();
 
   echo "New records created successfully";
