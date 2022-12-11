@@ -6,9 +6,9 @@ $dbname = "crud";
 
 if(($_SERVER['REQUEST_METHOD'] == 'POST')){
 
-$lastname = $_POST['lastname'];
-$firstname = $_POST['firstname'];
-$email = $_POST['email'];
+$lastname = filter_input(INPUT_POST,'lastname', FILTER_SANITIZE_SPECIAL_CHARS);
+$firstname = filter_input(INPUT_POST,'firstname', FILTER_SANITIZE_SPECIAL_CHARS);
+$email =  filter_input(INPUT_POST,'email', FILTER_SANITIZE_EMAIL);
 
 
 
