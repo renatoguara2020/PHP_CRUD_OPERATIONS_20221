@@ -12,10 +12,6 @@ $email = $_POST['email'];
 
 
 
-
-  
-}
-
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   // set the PDO error mode to exception
@@ -43,4 +39,6 @@ $stmt->execute();
 
 $stmt = null;
 $conn = null;
+
+}
 ?>
