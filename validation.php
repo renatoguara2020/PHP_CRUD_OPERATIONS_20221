@@ -27,11 +27,15 @@ try {
   $stmt->execute();
 
   echo "New records created successfully";
+
 } catch(PDOException $e) {
+    
   echo "Error: " . $e->getMessage();
 }
 
 //$stmt = $conn->prepare("DELETE FROM students WHERE id = 15");
+
+
 $stmt->execute();
 
 
