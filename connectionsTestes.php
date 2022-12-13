@@ -6,6 +6,7 @@ if (isset($_POST['username']) && ($_POST['password'])) {
     $password= filter_input(INPUT_POST,'password', FILTER_SANITIZE_SPECIAL_CHARS);
     //verifica se alguma variavel é uma variável vazia
     if (empty($username) || empty($password)) {
+        //$password = md5($password);
         echo "<li>Todos os campos são obrigatórios! </li>";
     } else {
         //conexão 
@@ -18,7 +19,7 @@ if (isset($_POST['username']) && ($_POST['password'])) {
         $query->execute();
 
         $num = $query->rowCount();
-        if ($num == 1) {
+        if ($num == 1) { 
             echo "Login success!!! Username $username e $password";
             exit();
 
