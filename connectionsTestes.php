@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (isset($_POST['username']) && ($_POST['password'])) {
     // Obtém valores do formulário do arquivo login.php
     $username = filter_input(INPUT_POST,'username', FILTER_SANITIZE_EMAIL);
@@ -21,7 +21,9 @@ if (isset($_POST['username']) && ($_POST['password'])) {
         $num = $query->rowCount();
         if ($num == 1) { 
             echo "Login success!!! Username $username e $password";
-            exit();
+            
+
+            echo "Login success!!!$username and  Password $password";
 
         } else {
             echo "Failed to login";
