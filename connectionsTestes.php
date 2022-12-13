@@ -9,16 +9,16 @@ if (isset($_POST['username']) && ($_POST['password'])) {
         echo "<li>Todos os campos são obrigatórios! </li>";
     } else {
         //conexão 
-        $pdo = new PDO('mysql:host=localhost;dbname=nome+_DB', 'USUARIO', 'SENHA');
-        $query = $pdo->prepare("SELECT * FROM utilizadores WHERE username = :username AND password = :password");
-        $query->bindValue(':username', $username);
-        $query->bindValue(':password', $password);
+        $pdo = new PDO('mysql:host=localhost;dbname=testes_db', 'root', '');
+        $query = $pdo->prepare("SELECT * FROM usuarios WHERE username = :username AND password1 = :password1");
+        $query->bindParam(':username', $username, PDO::PARAM_STR);
+        $query->bindParam(':password1', $password, PDO::PARAM_STR);
 
         $query->execute();
 
         $num = $query->rowCount();
         if ($num == 1) {
-            echo "Login success!!! Welcome ".$row['username'] . ''. $row['password'];
+            echo "Login success!!! Username $username e $password";
             exit();
 
         } else {
