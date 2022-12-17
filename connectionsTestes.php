@@ -13,6 +13,7 @@ if (isset($_POST['username']) && ($_POST['password'])) {
         $pdo = new PDO('mysql:host=localhost;dbname=testes_db', 'root', '');
         $query = $pdo->prepare("SELECT * FROM usuarios WHERE username = :username AND password1 = :password1");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+        $query->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE , PDO::FETCH_ASSOC);
         $query->bindValue(':username', $username, PDO::PARAM_STR);
         $query->bindValue(':password1', $password, PDO::PARAM_STR);
 
