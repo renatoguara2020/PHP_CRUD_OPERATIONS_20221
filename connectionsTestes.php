@@ -1,13 +1,15 @@
 <?php
 session_start();
 if (isset($_POST['username']) && ($_POST['password'])) {
+
+    $erros = array();
     // Obtém valores do formulário do arquivo login.php
     $username = filter_input(INPUT_POST,'username', FILTER_SANITIZE_EMAIL);
     $password= filter_input(INPUT_POST,'password', FILTER_SANITIZE_SPECIAL_CHARS);
     //verifica se alguma variavel é uma variável vazia
     if (empty($username) || empty($password)) {
         //$password = md5($password);
-        echo "<li>Todos os campos são obrigatórios! </li>";
+        echo $erros[] = "<li>Todos os campos são obrigatórios! </li>";
     } else {
         //conexão 
         $pdo = new PDO('mysql:host=localhost;dbname=testes_db', 'root', '');
@@ -27,7 +29,7 @@ if (isset($_POST['username']) && ($_POST['password'])) {
             echo "Login success!!!$username and  Password $password";
 
         } else {
-            echo "Failed to login";
+            echo $erros[] = "Failed to login";
         }
     }
 
