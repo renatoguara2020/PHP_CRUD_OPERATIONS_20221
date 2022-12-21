@@ -16,6 +16,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     $dsn = new PDO('mysql:host=localhost;dbname=testes_db', 'root', '');
     $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dsn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    //$dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $dsn->prepare("INSERT INTO ('firstname', 'lastname','email' ) VALUES(':firstname', ':lastname',':email')");
      $query  = $dsn->query("SELECT * FROM usuarios WHERE firstname = :firstname AND lastname = :lastname");
@@ -25,7 +26,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     $stmt->execute();
     
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-       foreach($stmt->fetchAll() as $k=>$valor) {
+       foreach($stmt->fetchAll() as $valor) {
        echo $valor;
   }
     }catch(PDOException $e){
