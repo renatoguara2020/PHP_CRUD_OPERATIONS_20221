@@ -17,7 +17,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dsn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-    $stmt = $dsn->prepare('INSERT INTO (firstname, lastname, email ) VALUES(:firstname, :lastname, :email)');
+    $stmt = $dsn->prepare("INSERT INTO ('firstname', 'lastname','email' ) VALUES(':firstname', ':lastname',':email')");
      $query  = $dsn->query("SELECT * FROM usuarios WHERE firstname = :firstname AND lastname = :lastname");
     $stmt->bindValue(':firstname', $firstname, PDO::PARAM_STR);
     $stmt->bindValue(':lastname', $lastname, PDO::PARAM_STR);
@@ -25,8 +25,8 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     $stmt->execute();
     
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-       foreach($stmt->fetchAll() as $k=>$v) {
-       echo $v;
+       foreach($stmt->fetchAll() as $k=>$valor) {
+       echo $valor;
   }
     }catch(PDOException $e){
 
