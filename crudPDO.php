@@ -18,22 +18,49 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     $dsn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     $stmt = $dsn->prepare('INSERT INTO (firstname, lastname, email ) VALUES(:firstname, :lastname, :email)');
-
+     $query  = $dsn->query("SELECT * FROM usuarios WHERE firstname = :firstname AND lastname = :lastname");
     $stmt->bindValue(':firstname', $firstname, PDO::PARAM_STR);
     $stmt->bindValue(':lastname', $lastname, PDO::PARAM_STR);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
     
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+       foreach($stmt->fetchAll() as $k=>$v) {
+       echo $v;
+  }
     }catch(PDOException $e){
 
-  echo  "Error:   $e->getMessage()  $e->$getCode() ";
+  echo  "Error:   $e->getMessage()  Código  $e->$getCode() ";
   http_response_code(500);
 
     }
     
 }
 
-} 
+} #########################################################################################################
+
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDBPDO";
+
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $stmt = $conn->prepare("SELECT id, firstname, lastname FROM My_users");
+  $stmt->execute();
+
+  // set the resulting array to associative
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  foreach($stmt->fetchAll() as $k=>$v) {
+    echo $v;
+  }
+} catch(PDOException $e) {
+  echo "Error: " . $e->getMessage();
+}
+$conn = null;
+echo "</table>";
+?>
 
 
 
